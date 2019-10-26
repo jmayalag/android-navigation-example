@@ -2,6 +2,7 @@ package com.incursio.pagertest.ui.notifications
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,6 @@ import java.lang.ClassCastException
 class NotificationsFragment : Fragment() {
 
     private lateinit var notificationsViewModel: NotificationsViewModel
-
     private lateinit var notificationsListener: NotificationsListener
 
     override fun onCreateView(
@@ -44,5 +44,10 @@ class NotificationsFragment : Fragment() {
         } else {
             throw ClassCastException("${context.toString()} must implement ${NotificationsListener::class.java}")
         }
+    }
+
+    fun setCounterValue(value: Int) {
+        Log.d("NotificationsFragment", "Counter set to $value")
+        notificationsViewModel.updateText("Counter: $value")
     }
 }

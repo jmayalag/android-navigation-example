@@ -1,8 +1,8 @@
 package com.incursio.pagertest.ui.dashboard
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.incursio.pagertest.R
-import java.lang.ClassCastException
 
 class DashboardFragment : Fragment() {
     private lateinit var dashboardViewModel: DashboardViewModel
@@ -32,6 +31,7 @@ class DashboardFragment : Fragment() {
         dashboardViewModel.text.observe(this, Observer {
             textView.text = it
         })
+
         return root
     }
 
@@ -42,5 +42,10 @@ class DashboardFragment : Fragment() {
         } else {
             throw ClassCastException("${context.toString()} must implement ${DashboardListener::class.java}")
         }
+    }
+
+    fun setCounterValue(value: Int) {
+        Log.d("DashboardFragment", "Counter set to $value")
+        dashboardViewModel.updateText("Counter: $value")
     }
 }
